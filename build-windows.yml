@@ -1,0 +1,35 @@
+name: Build OilBill V3 for Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "electron/**"
+      - "package.json"
+      - "vite.config.js"
+      - ".github/workflows/build-windows.yml"
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Build web application
+        run: npm run build
+      - name: Package Windows application
+        run: npm run desktop:build
+      - name: Upload Windows installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: OilBill-V3-Windows
+          path: release/*
+          if-no-files-found: error
+          retention-days: 14
