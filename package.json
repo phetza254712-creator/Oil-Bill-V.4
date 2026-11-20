@@ -1,6 +1,8 @@
 {
   "name": "oilbill-v3",
   "version": "3.0.1",
+  "description": "OilBill V3 - ระบบจัดการบิลน้ำมันและรายงานค่าใช้จ่าย",
+  "author": "OilBill",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +11,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "desktop": "electron .",
-    "desktop:build": "electron-builder --win nsis portable",
+    "desktop:build": "electron-builder --win nsis portable --publish never",
     "android:sync": "cap sync android",
     "android:open": "cap open android"
   },
