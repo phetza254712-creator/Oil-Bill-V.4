@@ -1,6 +1,6 @@
 {
   "name": "oilbill-v3",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -27,13 +27,27 @@
     "vite": "^7.0.6",
     "vitest": "^3.2.4"
   },
-  "main": "electron/main.cjs",
+  "main": "main.cjs",
   "build": {
     "appId": "th.oilbill.v3",
     "productName": "OilBill V3",
-    "directories": { "output": "release" },
-    "files": ["dist/**/*", "electron/**/*", "package.json"],
-    "win": { "target": ["nsis", "portable"], "icon": "public/icon.ico" },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "main.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
