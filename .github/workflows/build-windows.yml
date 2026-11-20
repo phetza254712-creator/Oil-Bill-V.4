@@ -1,0 +1,42 @@
+name: OilBill V3 - Windows Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    name: Build OilBill V3 for Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Build Windows Installer and Portable
+        run: npx electron-builder --win nsis portable
+
+      - name: Upload Windows EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: OilBill-V3-Windows
+          path: |
+            dist/*.exe
+          if-no-files-found: error
+          retention-days: 14
